@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Case 1: Holiday Activities</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        pre {
+            background-color: #eaeaea;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        a {
+            color: #0073e6;
+        }
+    </style>
+</head>
+<body>
+    <h1>Case 1: Holiday Activities</h1>
+    <p><strong>Scenario:</strong> Four friends are debating what fun activities they can do during the Holiday Season. They talk about "going skiing," "reading comic books," "binging on Christmas movies," "staying home with family," or "catching up on homework". Each friend gives their opinion on each activity, choosing from <em>STRONGLY DISAGREE, DISAGREE, NEUTRAL, AGREE, STRONGLY AGREE</em>.</p>
+    <p><strong>Question:</strong> Please show the name of each friend, the number of friends who agree that "Staying home with family" is a fun Holiday activity, and their level of agreement (<em>Strongly Agree</em> or <em>Agree</em>).</p>
+    <p><strong>Answer Format:</strong> Please display:</p>
+    <ul>
+        <li>name</li>
+        <li>number_of_friends_who_agree</li>
+        <li>agreement_level</li>
+    </ul>
+    <h2>Table: holiday</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>activity</th>
+                <th>opinion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Amaya</td><td>Skiing</td><td>STRONGLY AGREE</td></tr>
+            <tr><td>2</td><td>Iban</td><td>Skiing</td><td>NEUTRAL</td></tr>
+            <tr><td>3</td><td>Max</td><td>Skiing</td><td>STRONGLY AGREE</td></tr>
+            <tr><td>4</td><td>Solene</td><td>Skiing</td><td>DISAGREE</td></tr>
+            <tr><td>13</td><td>Amaya</td><td>Staying home with family</td><td>AGREE</td></tr>
+            <tr><td>14</td><td>Iban</td><td>Staying home with family</td><td>AGREE</td></tr>
+            <tr><td>15</td><td>Max</td><td>Staying home with family</td><td>STRONGLY AGREE</td></tr>
+            <tr><td>16</td><td>Solene</td><td>Staying home with family</td><td>AGREE</td></tr>
+        </tbody>
+    </table>
+    <h2>Solution:</h2>
+    <pre>
+SELECT 
+    name,
+    COUNT(*) AS number_of_friends_who_agree,
+    opinion AS agreement_level
+FROM holiday
+WHERE activity = "Staying home with family"
+      AND opinion IN ("AGREE", "STRONGLY AGREE")
+GROUP BY name, opinion;
+    </pre>
+    <h2>Expected Output:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>number_of_friends_who_agree</th>
+                <th>agreement_level</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Amaya</td><td>1</td><td>AGREE</td></tr>
+            <tr><td>Iban</td><td>1</td><td>AGREE</td></tr>
+            <tr><td>Max</td><td>1</td><td>STRONGLY AGREE</td></tr>
+            <tr><td>Solene</td><td>1</td><td>AGREE</td></tr>
+        </tbody>
+    </table>
+    <a href="index.html">Back to Home</a>
+</body>
+</html>
+
